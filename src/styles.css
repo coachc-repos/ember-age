@@ -1,0 +1,127 @@
+@import url("https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,560;9..144,700&family=Outfit:wght@400;500;600&display=swap");
+@import "tailwindcss";
+
+@theme {
+  --color-bg: #16110c;
+  --color-surface: #2a1e16;
+  --color-fg: #f3e7d4;
+  --color-muted: #b5a08c;
+  --color-ember: #e3843a;
+  --color-blood: #c44836;
+  --color-pool: #3d6e68;
+  --font-sans: "Outfit", ui-sans-serif, system-ui, sans-serif;
+  --font-display: "Fraunces", Palatino, "Palatino Linotype", serif;
+  --radius-card: 1.25rem;
+}
+
+@layer base {
+  html,
+  body {
+    height: 100%;
+    background: var(--color-bg);
+    color: var(--color-fg);
+  }
+
+  button:not(:disabled),
+  [role="button"]:not(:disabled) {
+    cursor: pointer;
+  }
+
+  button:disabled {
+    cursor: not-allowed;
+    opacity: 0.55;
+  }
+
+  button:focus-visible {
+    outline: 2px solid var(--color-ember);
+    outline-offset: 3px;
+  }
+}
+
+.game-root {
+  user-select: none;
+  -webkit-user-select: none;
+  touch-action: manipulation;
+}
+
+.game-root canvas,
+.game-root .touch-none {
+  touch-action: none;
+  background: #87b4d0;
+}
+
+.meter-fill {
+  height: 100%;
+  width: 0%;
+  border-radius: inherit;
+}
+
+.fill-blood {
+  background: var(--color-blood);
+}
+
+.fill-ember {
+  background: var(--color-ember);
+}
+
+.fill-bone {
+  background: var(--color-fg);
+}
+
+.fill-pool {
+  background: var(--color-pool);
+}
+
+.touch-ui {
+  display: flex;
+  z-index: 35;
+  pointer-events: auto;
+}
+
+.game-root.force-land,
+.game-root.force-land-ccw,
+.game-root.force-port {
+  position: fixed;
+  height: 100vw;
+  width: 100vh;
+  max-width: none;
+}
+
+.game-root.force-land {
+  top: 0;
+  left: 100vw;
+  transform: rotate(90deg);
+  transform-origin: top left;
+}
+
+.game-root.force-land-ccw {
+  top: 100vh;
+  left: 0;
+  transform: rotate(-90deg);
+  transform-origin: top left;
+}
+
+.game-root.force-port {
+  top: 0;
+  left: 0;
+  transform: rotate(-90deg) translateX(-100%);
+  transform-origin: top left;
+}
+
+.game-root.is-tall .hotbar-wrap {
+  bottom: 11.5rem;
+}
+
+.game-root.is-wide .hotbar-wrap {
+  bottom: 6.25rem;
+}
+
+.game-root.is-wide .touch-ui {
+  padding-bottom: 0.4rem;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .fade-overlay {
+    transition: none;
+  }
+}
